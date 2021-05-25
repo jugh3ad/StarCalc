@@ -1,0 +1,57 @@
+.starContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.starIcon {
+    content:url("../imgs/Star.png");
+    width: 100px;
+    height: 100px;
+}
+.gsIcon {
+    content:url("../imgs/GoldenScrap.png");
+    width: 75px;
+    height: 75px;
+}
+.magIcon {
+    content:url("../imgs/magnet.png");
+    width: 75px;
+    height: 75px;
+}
+.fragmentIcon {
+    content:url("../imgs/starfragment.png");
+    width: 75px;
+    height: 75px;
+}
+.starInput{
+    width: 50px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-weight: bold;
+    font-size:medium;
+}
+.dispInput{
+    text-align: center;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+body {
+background-color: #a1a1a1;
+min-width: 375px;
+max-width: 550px;
+margin: auto;
+
+}
+
+.red::placeholder{
+    color: red;
+}
