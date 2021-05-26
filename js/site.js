@@ -43,12 +43,13 @@ function calculate() {
   var gsAmount = 0;
   var magAmount = 0;
   var fragmentAmount = 0;
+  var scrapyardMul = scrapyardModifier();
 
   stars.forEach((star) => {
       for (let index = Number(star); index < Number(desired); index++) {
-          gsAmount += gsCost(index);
-          magAmount += magnetCost(index);
-          fragmentAmount += fragmentCost(index);
+          gsAmount += gsCost(index, scrapyardMul);
+          magAmount += magnetCost(index, scrapyardMul);
+          fragmentAmount += fragmentCost(index, scrapyardMul);
       }
   });
 
@@ -63,7 +64,7 @@ function isNumber(event) {
   }
 }
 
-function gsCost(starLevel) {
+function gsCost(starLevel, scrapyardMul) {
   var cost = 100000 * (starLevel - 10) + 250000; //adjust for first 10 stars
   if (starLevel >= 20) cost *= 1.3;
   if (starLevel >= 30) cost *= 1.3;
@@ -87,7 +88,7 @@ function gsCost(starLevel) {
   if (starLevel >= 450) cost *= 1.1;
   if (starLevel >= 500) cost *= 1.1;
   if (starLevel >= 550) cost *= 1.1;
-  return Math.floor((cost * 100) / (scrapyardModifier() + 100));
+  return Math.floor((cost * 100) / (scrapyardMul + 100));
 }
 
 function scrapyardModifier()
@@ -107,7 +108,7 @@ function scrapyardModifier()
     return modifier - 1;
 }
 
-function magnetCost(starLevel) {
+function magnetCost(starLevel, scrapyardMul) {
   var cost = 250 * (starLevel - 10) + 1000; //adjust for first 10 stars
   if (starLevel >= 12) cost *= 0.98;
   if (starLevel >= 13) cost *= 0.98;
@@ -195,10 +196,10 @@ function magnetCost(starLevel) {
   if (starLevel >= 1760) cost *= 1.269;
   if (starLevel >= 1810) cost *= 1.1;
   if (starLevel >= 1860) cost *= Math.pow(1.1, Math.floor((starLevel - 1810) / 50));
-  return Math.floor(cost * 100 / (scrapyardModifier() + 100));
+  return Math.floor(cost * 100 / (scrapyardMul + 100));
 }
 
-function fragmentCost(starLevel) {
+function fragmentCost(starLevel, scrapyardMul) {
   var cost = 4 + (starLevel - 10); //adjust for first 10 stars
   if (starLevel >= 60) cost *= 1.05;
   if (starLevel >= 70) cost *= 1.05;
@@ -232,5 +233,5 @@ function fragmentCost(starLevel) {
   if (starLevel >= 810) cost *= 1.1;
   if (starLevel >= 910) cost *= 1.1;
   if (starLevel >= 1010) cost *= 1.1;
-  return Math.floor((cost * 100) / (scrapyardModifier() + 100));
+  return Math.floor((cost * 100) / (scrapyardMul + 100));
 }
