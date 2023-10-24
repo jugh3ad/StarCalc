@@ -121,7 +121,7 @@ function magnetCost(starLevel, scrapyardMul) {
   if (starLevel >= 20) cost *= 0.98;
   if (starLevel >= 21) cost *= 0.98;
   if (starLevel >= 22) cost *= 0.98;
-  if (starLevel >= 23) cost *= 0.99;
+  if (starLevel >= 23) cost *= 0.98;
   if (starLevel >= 70) cost *= 1.04;
   if (starLevel >= 75) cost *= 1.04;
   if (starLevel >= 80) cost *= 1.06;
@@ -184,10 +184,10 @@ function magnetCost(starLevel, scrapyardMul) {
   if (starLevel >= 1210) cost *= 1.3;
   if (starLevel >= 1260) cost *= 1.18;
   if (starLevel >= 1285) cost *= 1.18;
-  if (starLevel >= 1310) cost *= 1.4;
-  if (starLevel >= 1360) cost *= 1.4;
-  if (starLevel >= 1410) cost *= 1.45;
-  if (starLevel >= 1460) cost *= 1.4;
+  if (starLevel >= 1310) cost *= 1.37;
+  if (starLevel >= 1360) cost *= 1.37;
+  if (starLevel >= 1410) cost *= 1.37;
+  if (starLevel >= 1460) cost *= 1.38;
   if (starLevel >= 1510) cost *= 1.3;
   if (starLevel >= 1560) cost *= 1.269;
   if (starLevel >= 1610) cost *= 1.1;
