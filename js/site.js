@@ -1,18 +1,111 @@
-var inputs = ["inpStar1","inpStar2","inpStar3","inpStar4","inpStar5","inpStar6","inpStar7","inpStar8","inpStar9","inpStar10","v2","target"];
+var inputs = ["setAll","v2","target"];
+var inpStars = ["inpStar1","inpStar2","inpStar3","inpStar4","inpStar5","inpStar6","inpStar7","inpStar8","inpStar9","inpStar10"]
+var language = window.navigator.userLanguage || window.navigator.language;
+
+var languages = {
+  "en": {
+    "Title": "Star Calc",
+    "SetAll": "Set all to: ",
+    "Settings": "Remember levels: ",
+    "v2Level": "Scrapyard V2: ",
+    "Target": "Target Stars: "
+  },
+  "es": {
+    "Title": "Cálculo de Estrellas",
+    "SetAll": "Establecer todo en: ",
+    "Settings": "Recuerda niveles: ",
+    "v2Level": "Vertedero V2: ",
+    "Target": "Objetivo Estrellas: "
+  },
+  "ru": {
+    "Title": "Звездный Кальк",
+    "SetAll": "Установить все звезды: ",
+    "Settings": "Запомнить уровни: ",
+    "v2Level": "Двор мусора v2: ",
+    "Target": "Целевые звезды: "
+  },
+  "de": {
+    "Title": "Sterne Kalkulator",
+    "Settings": "Merken Sie sich die Level: ",
+    "SetAll": "Setze alle Sterne: ",
+    "v2Level": "Schrottplatz V2: ",
+    "Target": "Zielsterne: "
+  },
+  "fr": {
+    "Title": "Étoile Calculette",
+    "Settings": "Mémoriser les niveaux: ",
+    "SetAll": "Définir toutes les étoiles: ",
+    "v2Level": "Parc à casse V2: ",
+    "Target": "Cible Étoile: "
+  }
+}
+
+
+language = language.substring(0,2);
+document.getElementById("lblTitle").innerHTML = languages[language]["Title"];
+document.getElementById("lblSetAll").innerHTML = languages[language]["SetAll"];
+document.getElementById("lblSettings").innerHTML = languages[language]["Settings"];
+document.getElementById("lblv2Level").innerHTML = languages[language]["v2Level"];
+document.getElementById("lblTarget").innerHTML = languages[language]["Target"];
+
+window.onload = checkLocalStorage();
+
+function onRememberMeChange(){
+	if (document.getElementById("rememberMe").checked) 
+	{
+		setLocalStorage()
+	}
+	else
+	{
+		localStorage.clear();
+	}
+}
+
+function setLocalStorage() {
+	inputs.forEach(input => {
+		localStorage.setItem(input,document.getElementById(input).value);
+	});
+	inpStars.forEach(input => {
+		localStorage.setItem(input,document.getElementById(input).value);
+	});
+	localStorage.setItem("rememberMe",document.getElementById("rememberMe").checked);
+}
+
+function checkLocalStorage(){
+	var cond = JSON.parse(localStorage.getItem("rememberMe"));
+	if (!cond){
+		localStorage.clear()
+		calculate();
+		return;
+	}
+	document.getElementById("rememberMe").checked = JSON.parse(localStorage.getItem("rememberMe"));
+	inpStars.forEach(input => {
+		if (Number(localStorage.getItem(input))) 
+		{
+		  document.getElementById(input).value = localStorage.getItem(input);
+		}
+	});
+	inputs.forEach(input => {
+		if (Number(localStorage.getItem(input))) 
+		{
+		  document.getElementById(input).value = localStorage.getItem(input);
+		}
+	});
+	calculate();
+}
 
 function setAll() {
-  inputs.forEach(input => {
+  inpStars.forEach(input => {
     if (input.includes("inpStar")) {
       document.getElementById(input).value = document.getElementById("setAll").value;
     }
-    
+    document.getElementById("target").value = +document.getElementById("setAll").value + 1;
   });
-
-    }
-
+}
+	
 function calculate() {
   var isValid = true;
-  inputs.every(input => {
+  inpStars.every(input => {
     if (document.getElementById(input).value <= 0) {
       document.getElementById(input).select();
       document.getElementById(input).classList.add("red");
@@ -37,7 +130,6 @@ function calculate() {
       document.getElementById("inpStar10").value,
   ];
 
-
   var desired = document.getElementById("target").value;
 
   var gsAmount = 0;
@@ -53,15 +145,12 @@ function calculate() {
       }
   });
 
-  document.getElementById("gs").innerHTML = gsAmount.toLocaleString();
-  document.getElementById("mag").innerHTML = magAmount.toLocaleString();
-  document.getElementById("fragment").innerHTML = fragmentAmount.toLocaleString();
-}
-
-function isNumber(event) {
-  if (!String.fromCharCode(event.which).match(/[0-9]/)) {
-      event.preventDefault();
-  }
+  document.getElementById("gs").innerHTML = gsAmount.toLocaleString(language);
+  document.getElementById("mag").innerHTML = magAmount.toLocaleString(language);
+  document.getElementById("fragment").innerHTML = fragmentAmount.toLocaleString(language);
+  
+  if ( document.getElementById("rememberMe").checked ) setLocalStorage();
+  
 }
 
 function gsCost(starLevel, scrapyardMul) {
