@@ -99,7 +99,10 @@ function setAll() {
     if (input.includes("inpStar")) {
       document.getElementById(input).value = document.getElementById("setAll").value;
     }
+	  if (document.getElementById("target").value <= document.getElementById("setAll").value){
+		  
     document.getElementById("target").value = +document.getElementById("setAll").value + 1;
+  }
   });
 }
 	
