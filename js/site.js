@@ -211,7 +211,7 @@ function achievementModifier()
   {
     var modifier;
     var amount = document.getElementById("achievement").value;
-    modifier = 1000 - Math.min(0,Math.max(50,amount - 25));
+    modifier = 1000 - Math.max(0,Math.min(50,amount - 25));
     return modifier;
   }
 
