@@ -1,4 +1,4 @@
-var inputs = ["setAll","v2","achievement","masteryBoost17","target"]; //TODO mb17
+var inputs = ["setAll","v2","achievement","masteryBoost17","target"];
 var inpStars = ["inpStar1","inpStar2","inpStar3","inpStar4","inpStar5","inpStar6","inpStar7","inpStar8","inpStar9","inpStar10"]
 var language = window.navigator.userLanguage || window.navigator.language;
 
