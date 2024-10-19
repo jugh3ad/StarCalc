@@ -5,6 +5,8 @@ A companion app/website for the merging game Scrap Clicker 2.
 Provides the ability to calculate the resources needed to reach a specific Star level when providing:
 * Current Star Level
 * Current Scrapyard v2 Level
+* Obtained Achievements
+* Amount of barrels that reached Mastery 17
 * Target Star Level
 
 One calculated, it will provide the needed amounts of:

@@ -1,14 +1,15 @@
-var inputs = ["setAll","v2","achievement","target"];
+var inputs = ["setAll","v2","achievement","masteryBoost17","target"];
 var inpStars = ["inpStar1","inpStar2","inpStar3","inpStar4","inpStar5","inpStar6","inpStar7","inpStar8","inpStar9","inpStar10"]
 var language = window.navigator.userLanguage || window.navigator.language;
 
-var languages = { //TODO translate AchievementAmount label
+var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
   "en": {
     "Title": "Star Calc",
     "SetAll": "Set all to: ",
     "Settings": "Remember levels: ",
     "v2Level": "Scrapyard V2: ",
     "AchievementAmount": "Unlocked Achievements: ",
+    "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Target Stars: "
   },
   "es": {
@@ -17,6 +18,7 @@ var languages = { //TODO translate AchievementAmount label
     "Settings": "Recuerda niveles: ",
     "v2Level": "Vertedero V2: ",
     "AchievementAmount": "Unlocked Achievements: ",
+    "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Objetivo Estrellas: "
   },
   "ru": {
@@ -25,6 +27,7 @@ var languages = { //TODO translate AchievementAmount label
     "Settings": "Запомнить уровни: ",
     "v2Level": "Двор мусора v2: ",
     "AchievementAmount": "Unlocked Achievements: ",
+    "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Целевые звезды: "
   },
   "de": {
@@ -33,6 +36,7 @@ var languages = { //TODO translate AchievementAmount label
     "SetAll": "Setze alle Sterne: ",
     "v2Level": "Schrottplatz V2: ",
     "AchievementAmount": "Unlocked Achievements: ",
+    "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Zielsterne: "
   },
   "fr": {
@@ -41,6 +45,7 @@ var languages = { //TODO translate AchievementAmount label
     "SetAll": "Définir toutes les étoiles: ",
     "v2Level": "Parc à casse V2: ",
     "AchievementAmount": "Unlocked Achievements: ",
+    "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Cible Étoile: "
   }
 }
@@ -52,6 +57,7 @@ document.getElementById("lblSetAll").innerHTML = languages[language]["SetAll"];
 document.getElementById("lblSettings").innerHTML = languages[language]["Settings"];
 document.getElementById("lblv2Level").innerHTML = languages[language]["v2Level"];
 document.getElementById("lblAchievementAmount").innerHTML = languages[language]["AchievementAmount"];
+document.getElementById("lblMasteryBoost17").innerHTML = languages[language]["MasteryBoost17"];
 document.getElementById("lblTarget").innerHTML = languages[language]["Target"];
 
 window.onload = checkLocalStorage();
@@ -115,7 +121,7 @@ function setAll() {
 function calculate() {
   var isValid = true;
   inpStars.every(input => {
-    if (document.getElementById(input).value <= 0) {
+    if (document.getElementById(input).value <= 0) { // TODO can be raised to < 10
       document.getElementById(input).select();
       document.getElementById(input).classList.add("red");
       isValid = false;
@@ -146,12 +152,13 @@ function calculate() {
   var fragmentAmount = 0;
   var scrapyardMul = scrapyardModifier();
   var achievementMul = achievementModifier(); // scaled by 1000, to be multiplied
+  var masteryBoost17Mul = masteryBoost17Modifier(); // To be multiplied
 
   stars.forEach((star) => {
       for (let index = Number(star); index < Number(desired); index++) {
-          gsAmount += gsCost(index, scrapyardMul, achievementMul);
-          magAmount += magnetCost(index, scrapyardMul, achievementMul);
-          fragmentAmount += fragmentCost(index, scrapyardMul, achievementMul);
+          gsAmount += gsCost(index, scrapyardMul, achievementMul, masteryBoost17Mul);
+          magAmount += magnetCost(index, scrapyardMul, achievementMul, masteryBoost17Mul);
+          fragmentAmount += fragmentCost(index, scrapyardMul, achievementMul, masteryBoost17Mul);
       }
   });
 
@@ -163,7 +170,40 @@ function calculate() {
   
 }
 
-function gsCost(starLevel, scrapyardMul, achievementMul) {
+function scrapyardModifier()
+{
+    var modifier;
+    var level = document.getElementById("v2").value;
+    if (level > 200)
+      {
+        modifier = (level - 200) * 4 + 300;
+    }
+    else
+    {
+      modifier = level;
+      if (level > 100)
+        modifier = (level - 100) * 2 + 100;
+    }
+    return modifier - 1;
+}
+
+function achievementModifier()
+{
+  var modifier;
+  var amount = document.getElementById("achievement").value;
+  modifier = 1000 - Math.max(0,Math.min(50,amount - 25));
+  return modifier;
+}
+
+function masteryBoost17Modifier()
+{
+  var modifier;
+  var amount = document.getElementById("masteryBoost17").value;
+  modifier = Math.pow(0.99,Math.floor(amount/10));
+  return modifier;
+}
+
+function gsCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) {
   var cost = 100000 * (starLevel - 10) + 250000; //adjust for first 10 stars
   if (starLevel >= 20) cost *= 1.3;
   if (starLevel >= 30) cost *= 1.3;
@@ -187,35 +227,10 @@ function gsCost(starLevel, scrapyardMul, achievementMul) {
   if (starLevel >= 450) cost *= 1.1;
   if (starLevel >= 500) cost *= 1.1;
   if (starLevel >= 550) cost *= 1.1;
-  return Math.floor((cost * 100) * achievementMul / ((scrapyardMul + 100) * 1000));
+  return Math.floor((cost * 100) * achievementMul * masteryBoost17Mul / ((scrapyardMul + 100) * 1000));
 }
 
-function scrapyardModifier()
-  {
-    var modifier;
-    var level = document.getElementById("v2").value;
-    if (level > 200)
-    {
-        modifier = (level - 200) * 4 + 300;
-    }
-    else
-    {
-        modifier = level;
-        if (level > 100)
-            modifier = (level - 100) * 2 + 100;
-    }
-    return modifier - 1;
-}
-
-function achievementModifier()
-  {
-    var modifier;
-    var amount = document.getElementById("achievement").value;
-    modifier = 1000 - Math.max(0,Math.min(50,amount - 25));
-    return modifier;
-  }
-
-function magnetCost(starLevel, scrapyardMul, achievementMul) {
+function magnetCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) {
   var cost = 250 * (starLevel - 10) + 1000; //adjust for first 10 stars
   if (starLevel >= 12) cost *= 0.98;
   if (starLevel >= 13) cost *= 0.98;
@@ -303,10 +318,10 @@ function magnetCost(starLevel, scrapyardMul, achievementMul) {
   if (starLevel >= 1760) cost *= 1.269;
   if (starLevel >= 1810) cost *= 1.1;
   if (starLevel >= 1860) cost *= Math.pow(1.1, Math.floor((starLevel - 1810) / 50));
-  return Math.floor((cost * 100) * achievementMul / ((scrapyardMul + 100) * 1000));
+  return Math.floor((cost * 100) * achievementMul * masteryBoost17Mul / ((scrapyardMul + 100) * 1000));
 }
 
-function fragmentCost(starLevel, scrapyardMul, achievementMul) {
+function fragmentCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) {
   var cost = 4 + (starLevel - 10); //adjust for first 10 stars
   if (starLevel >= 60) cost *= 1.05;
   if (starLevel >= 70) cost *= 1.05;
@@ -340,5 +355,5 @@ function fragmentCost(starLevel, scrapyardMul, achievementMul) {
   if (starLevel >= 810) cost *= 1.1;
   if (starLevel >= 910) cost *= 1.1;
   if (starLevel >= 1010) cost *= 1.1;
-  return Math.floor((cost * 100) * achievementMul / ((scrapyardMul + 100) * 1000));
+  return Math.floor((cost * 100) * achievementMul * masteryBoost17Mul / ((scrapyardMul + 100) * 1000));
 }
