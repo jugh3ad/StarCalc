@@ -2,13 +2,13 @@ var inputs = ["setAll","v2","achievement","masteryBoost17","target"];
 var inpStars = ["inpStar1","inpStar2","inpStar3","inpStar4","inpStar5","inpStar6","inpStar7","inpStar8","inpStar9","inpStar10"]
 var language = window.navigator.userLanguage || window.navigator.language;
 
-var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
+var languages = { //TODO translate Achievement25, MasteryBoost17 label
   "en": {
     "Title": "Star Calc",
     "SetAll": "Set all to: ",
     "Settings": "Remember levels: ",
     "v2Level": "Scrapyard V2: ",
-    "AchievementAmount": "Unlocked Achievements: ",
+    "Achievement25": "Achievement Boost 2 Level:",
     "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Target Stars: "
   },
@@ -17,7 +17,7 @@ var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
     "SetAll": "Establecer todo en: ",
     "Settings": "Recuerda niveles: ",
     "v2Level": "Vertedero V2: ",
-    "AchievementAmount": "Unlocked Achievements: ",
+    "Achievement25": "Achievement Boost 2 Level:",
     "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Objetivo Estrellas: "
   },
@@ -26,7 +26,7 @@ var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
     "SetAll": "Установить все звезды: ",
     "Settings": "Запомнить уровни: ",
     "v2Level": "Двор мусора v2: ",
-    "AchievementAmount": "Unlocked Achievements: ",
+    "Achievement25": "Achievement Boost 2 Level:",
     "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Целевые звезды: "
   },
@@ -35,7 +35,7 @@ var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
     "Settings": "Merken Sie sich die Level: ",
     "SetAll": "Setze alle Sterne: ",
     "v2Level": "Schrottplatz V2: ",
-    "AchievementAmount": "Unlocked Achievements: ",
+    "Achievement25": "Achievement Boost 2 Level:",
     "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Zielsterne: "
   },
@@ -44,7 +44,7 @@ var languages = { //TODO translate AchievementAmount, MasteryBoost17 label
     "Settings": "Mémoriser les niveaux: ",
     "SetAll": "Définir toutes les étoiles: ",
     "v2Level": "Parc à casse V2: ",
-    "AchievementAmount": "Unlocked Achievements: ",
+    "Achievement25": "Achievement Boost 2 Level:",
     "MasteryBoost17": "Mastery 17+ Barrels:",
     "Target": "Cible Étoile: "
   }
@@ -56,7 +56,7 @@ document.getElementById("lblTitle").innerHTML = languages[language]["Title"];
 document.getElementById("lblSetAll").innerHTML = languages[language]["SetAll"];
 document.getElementById("lblSettings").innerHTML = languages[language]["Settings"];
 document.getElementById("lblv2Level").innerHTML = languages[language]["v2Level"];
-document.getElementById("lblAchievementAmount").innerHTML = languages[language]["AchievementAmount"];
+document.getElementById("lblAchievement25").innerHTML = languages[language]["Achievement25"];
 document.getElementById("lblMasteryBoost17").innerHTML = languages[language]["MasteryBoost17"];
 document.getElementById("lblTarget").innerHTML = languages[language]["Target"];
 
@@ -191,7 +191,7 @@ function achievementModifier()
 {
   var modifier;
   var amount = document.getElementById("achievement").value;
-  modifier = 1000 - Math.max(0,Math.min(50,amount - 25));
+  modifier = Math.min(0, 1000 - Math.max(0,amount * 2));
   return modifier;
 }
 
