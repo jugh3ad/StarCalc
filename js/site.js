@@ -230,7 +230,7 @@ function gsCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) {
   return Math.floor((cost * 100) * achievementMul * masteryBoost17Mul / ((scrapyardMul + 100) * 1000));
 }
 
-function magnetCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) {
+function magnetCost(starLevel, scrapyardMul, achievementMul, masteryBoost17Mul) { //TODO: adjust with 11.6 formula change
   var cost = 250 * (starLevel - 10) + 1000; //adjust for first 10 stars
   if (starLevel >= 12) cost *= 0.98;
   if (starLevel >= 13) cost *= 0.98;
