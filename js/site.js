@@ -90,6 +90,7 @@ function setLocalStorage() {
   inpCheckbox.forEach(input => {
     localStorage.setItem(input,document.getElementById(input).checked)
   })
+  localStorage.setItem("inputNotation", document.getElementById("inputNotation").value)
 }
 
 function checkLocalStorage(){
@@ -115,6 +116,7 @@ function checkLocalStorage(){
 		  document.getElementById(input).value = localStorage.getItem(input);
 		}
 	});
+  document.getElementById("inputNotation").value = localStorage.getItem("inputNotation");
 	calculate();
 }
 
@@ -174,12 +176,58 @@ function calculate() {
       }
   });
 
-  document.getElementById("gs").innerHTML = gsAmount.toLocaleString(language);
-  document.getElementById("mag").innerHTML = magAmount.toLocaleString(language);
-  document.getElementById("fragment").innerHTML = fragmentAmount.toLocaleString(language);
+  document.getElementById("gs").innerHTML = convertNumberToNotation(gsAmount);
+  document.getElementById("mag").innerHTML = convertNumberToNotation(magAmount);
+  document.getElementById("fragment").innerHTML = convertNumberToNotation(fragmentAmount);
   
   if ( document.getElementById("rememberMe").checked ) setLocalStorage();
   
+}
+
+function convertNumberToNotation(number) {
+  if((Math.abs(number)<1e9) || (Math.abs(number)==1/0)) return number.toLocaleString(language);
+  var exponent = Math.floor(Math.log10(number));
+  var mantissa = (Math.floor(1e8 * (number / Math.pow(10,exponent)))/1e8);
+  switch(document.getElementById("inputNotation").value){
+    case "Original":
+      return number.toLocaleString(language);
+    case "Normal":
+      mantissa *= Math.pow(10, exponent%3);
+      var index = Math.floor(exponent/3)-1;
+      var index1 = Math.floor(index%10)
+      var index10 = Math.floor(index%100/10)
+      var index100 = Math.floor(index%1000/100)
+      var normal1 = ["", "U", "D", "T", "Q", "q", "S", "s", "O", "N"]
+      var normal10 = ["", "D", "V", "Tr", "QU", "qu", "Se", "Sp", "Oc", "No"]
+      var normal100 = ["", "C", "Overflow"]
+      var normalConcat = ""
+      switch(index%100){
+        case 0:
+          normalConcat = "".concat(normal100[index100], "t");
+          break;
+        case 1:
+          normalConcat = "".concat(normal100[index100], "M")
+          break;
+        case 2:
+          normalConcat = "".concat(normal100[index100], "B")
+          break;
+        default:
+          normalConcat = "".concat(normal100[index100], normal1[index1], normal10[index10])
+      }
+      return "".concat(mantissa.toPrecision(9)," ",normalConcat)
+    case "Abstract":
+      mantissa *= Math.pow(10, exponent%3);
+      var index = Math.floor(exponent/3)-1;
+      return "".concat(mantissa.toPrecision(9)," ",convertIndexToAbstract(index))
+    case "Scientific":
+      return "".concat(mantissa.toPrecision(9),"e",exponent)
+  }
+}
+
+function convertIndexToAbstract(index){
+  if(index<=0) return ""
+  var remainder = (Math.floor(index)-1)%26+1;
+  return "".concat(convertIndexToAbstract((index-remainder)/26),String.fromCharCode(96+remainder))
 }
 
 function scrapyardModifier()
