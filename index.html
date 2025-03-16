@@ -8,6 +8,15 @@
 </head>
 <body>
 <h1 class="text-center"><span id = "lblTitle">Star Levels </span></h1>
+<div class="text-center">
+    <span id="lblNotation">Number Notation:</span>
+    <select id="inputNotation" onchange="calculate()">
+        <option value="Original">Original</option>
+        <option value="Normal">Normal</option>
+        <option value="Abstract">Abstract</option>
+        <option value="Scientific">Scientific</option>
+    </select>
+</div>
 <div class="text-center" ><span id = "lblSetAll" >Set all Stars: </span><input id="setAll" type="number" maxlength="5" placeholder="Enter level" onchange="setAll();calculate()" min="10" value="10" ></div>
 <div class="text-center" ><span id = "lblSettings">Remember My Settings: </span><input id="rememberMe" type="checkbox" onchange="onRememberMeChange()"></div>
 <div class="d-grid gap-3">
@@ -99,6 +108,9 @@
         <label class="text-center">
             <span class="h3 w-50" id = "lblTarget">Target Star Level:</span>
             <input class="w-25" id="target" type="number" placeholder="Enter level" min="11" value="11" onchange="calculate()">
+        </label>
+        <label class="text-center" >
+            <span id = "lblMagic">Use Black Magic (Experimental): </span><input id="useMagic" type="checkbox" onchange="calculate()">
         </label>
         <!--<div class="text-center" style="padding: 10px;">
             <button class="btn btn-primary" onclick="calculate()" >Submit</button>
