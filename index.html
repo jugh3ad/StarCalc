@@ -1,131 +1,419 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>StarCalc</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/site.css" media="screen,projection"/>
-
+  <meta charset="UTF-8">
+  <title>SC2 Calculator Hub</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/i18next@latest/dist/umd/i18next.min.js"></script>
+  <script type="text/javascript" src="javascript/languages.js"></script>
 </head>
+
 <body>
-<h1 class="text-center"><span id = "lblTitle">Star Levels </span></h1>
-<div class="text-center" ><span id = "lblSetAll" >Set all Stars: </span><input id="setAll" type="number" maxlength="5" placeholder="Enter level" onchange="setAll();calculate()" min="10" value="10" ></div>
-<div class="text-center" ><span id = "lblSettings">Remember My Settings: </span><input id="rememberMe" type="checkbox" onchange="onRememberMeChange()"></div>
-<div class="d-grid gap-3">
-    <div class="container">
-        <div class="row d-flex justify-content-evenly">
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar1" type="number" value="10" maxlength="5" min="10" onchange="calculate()" >
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar2" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-evenly">
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar3" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar4" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar5" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-evenly">
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar6" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar7" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar8" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-evenly">
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="centered starInput" id="inpStar9" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-            <div class="col starContainer">
-                <label class="text-center">
-                    <img class="starIcon" alt="Star">
-                    <input class="starInput centered" id="inpStar10" type="number" value="10" maxlength="5" min="10" onchange="calculate()">
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="text-center">
-        <label class="text-center">
-            <span class="h3 w-50" id="lblv2Level">Scrapyard V2 Level:</span>
-            <input class="w-25" id="v2" type="number" placeholder="Enter level" min="1" value="1" onchange="calculate()">
-        </label>
-		<br/>
-        <label class="text-center">
-            <span class="h3 w-50" id = "lblTarget">Target Star Level:</span>
-            <input class="w-25" id="target" type="number" placeholder="Enter level" min="11" value="11" onchange="calculate()">
-        </label>
-        <!--<div class="text-center" style="padding: 10px;">
-            <button class="btn btn-primary" onclick="calculate()" >Submit</button>
-        </div> 
-		-->
+  <div class="tab-container">
+    <div class="tab-buttons">
+      <button id="btn-star" onclick="showTab(0)" class="btn-square">
+        <img src="images/star.png" alt="Star Calculator" />
+      </button>
+      <button id="btn-position" onclick="showTab(1)" class="btn-square">
+        <img src="images/position.png" alt="Position Upgrade Calculator" />
+      </button>
+      <button id="btn-quest" onclick="showTab(2)" class="btn-square">
+        <img src="images/quest.png" alt="Quest Level Calculator" />
+      </button>
+      <button id="btn-merges" onclick="showTab(3)" class="btn-rect">
+        <img src="images/merges.png" alt="Merges Calculator" />
+      </button>
+      <button id="btn-info" onclick="showTab(4)" class="btn-square">
+        <span>i</span>
+      </button>
+      <button id="btn-options" onclick="showTab(5)" class="btn-square">
+        <img src="images/options.png" alt="Options Menu" />
+      </button>
     </div>
 
-    <div class="container">
-        <div class="flex-column">
-            <div class="flex-row">
-                <img class="gsIcon" alt="Golden Scrap">
-                <label class="text-center">
-                    <span class="h3 dispInput" id="gs">0</span>
-                </label>
+    <div class="tab-content active" id="tab0">
+      <div class="accordion">
+        <button class="collapsible active" id="lg-setAllStars">Set all stars</button>
+        <div class="content" style="max-height: fit-content;">
+          <section id="target">
+            <label for="targetInput" class="target-label" id="lg-current">Current:</label>
+            <div class="target-wrapper">
+              <img src="images/Star.png" alt="current Star" class="target-icon">
+              <div class="target-overlay number-control">
+                <input type="number" id="currentInput" class="target-input" min="10" placeholder="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
             </div>
-            <div class="flex-row">
-                <img class="magIcon" alt="Magnets">
-                <label class="text-center">
-                    <span class="h3 dispInput" id="mag">0</span>
-                </label>
-            </div>
-            <div class="flex-row">
-                <img class="fragmentIcon" alt="Fragments">
-                <label class="text-center">
-                    <span class="h3 dispInput" id="fragment">0</span>
-                </label>
-            </div>
+          </section>
         </div>
+        <button class="collapsible" id="lg-setIndividualStars">Set individual stars</button>
+        <div class="content">
+          <section id="starGrid">
+            <div class="star-row">
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 1" class="star-icon">
+                  <input type="number" id="inpStar1" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 2" class="star-icon">
+                  <input type="number" id="inpStar2" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="star-row">
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 3" class="star-icon">
+                  <input type="number" id="inpStar3" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 4" class="star-icon">
+                  <input type="number" id="inpStar4" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 5" class="star-icon">
+                  <input type="number" id="inpStar5" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="star-row">
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 6" class="star-icon">
+                  <input type="number" id="inpStar6" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 7" class="star-icon">
+                  <input type="number" id="inpStar7" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 8" class="star-icon">
+                  <input type="number" id="inpStar8" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="star-row">
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 9" class="star-icon">
+                  <input type="number" id="inpStar9" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+              <div class="star-col">
+                <div class="star-wrapper">
+                  <img src="images/Star.png" alt="Star 10" class="star-icon">
+                  <input type="number" id="inpStar10" class="star-input" min="10" value="10">
+                  <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, -1)"
+                    ontouchend="stopChange()">−</button>
+                  <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                    onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <span class="number-control">
+        <section id="boost">
+          <div class="boost-grid">
+            <div class="boost-item">
+              <label for="V2" class="boost-label" id="lg-scrapyardV2">Scrapyard V2</label>
+              <div class="boost-row">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <input type="number" id="V2" class="boost-input" min="0" placeholder="0" value="0">
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="boost-item">
+              <label for="Achievement" class="boost-label" id="lg-achievementLvl2">Achievement LVL 2</label>
+              <div class="boost-row">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <input type="number" id="Achievement" class="boost-input" min="0" placeholder="0" value="0">
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="boost-item">
+              <label for="Mastery" class="boost-label" id="lg-masteryLvl17">Mastery LVL 17</label>
+              <div class="boost-row">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <input type="number" id="Mastery" class="boost-input" min="0" placeholder="0" value="0">
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </span>
+      <div class="accordion">
+        <button class="collapsible active" id="lg-setAllTarget">Set all target</button>
+        <div class="content" style="max-height: fit-content;">
+      <section id="target">
+        <label for="targetInput" class="target-label" id="lg-target">Target:</label> 
+        <div class="target-wrapper">
+          <img src="images/Star.png" alt="Target Star" class="target-icon">
+          <div class="target-overlay number-control">
+            <input type="number" id="targetInput" class="target-input" min="10" placeholder="10" value="10">
+            <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+              onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+            <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+              onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+          </div>
+        </div>
+      </section>
+        </div>
+      <!-- Collapsible Section -->
+      <button class="collapsible" id="lg-setIndividualTarget">Set individual target</button>
+      <div class="content">
+        <section id="starGrid">
+          <div class="star-row">
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 1" class="star-icon">
+                <input type="number" id="targetStar1" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 2" class="star-icon">
+                <input type="number" id="targetStar2" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="star-row">
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 3" class="star-icon">
+                <input type="number" id="targetStar3" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 4" class="star-icon">
+                <input type="number" id="targetStar4" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 5" class="star-icon">
+                <input type="number" id="targetStar5" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="star-row">
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 6" class="star-icon">
+                <input type="number" id="targetStar6" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 7" class="star-icon">
+                <input type="number" id="targetStar7" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 8" class="star-icon">
+                <input type="number" id="targetStar8" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="star-row">
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 9" class="star-icon">
+                <input type="number" id="targetStar9" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+            <div class="star-col">
+              <div class="star-wrapper">
+                <img src="images/Star.png" alt="Star 10" class="star-icon">
+                <input type="number" id="targetStar10" class="star-input" min="10" value="10">
+                <button type="button" class="btn-minus" onmousedown="startChange(this, -1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, -1)" ontouchend="stopChange()">−</button>
+                <button type="button" class="btn-plus" onmousedown="startChange(this, 1)" onmouseup="stopChange()"
+                  onmouseleave="stopChange()" ontouchstart="startChange(this, 1)" ontouchend="stopChange()">+</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      </div>
+      <section id="costs">
+        <div class="costs-column">
+          <div class="cost-item">
+            <div class="cost-row">
+              <img src="images/goldenScrap.png" alt="Golden Scrape" class="cost-icon">
+              <label for="goldenScrap" class="cost-label" id="gsCost">Golden Scrap Cost</label>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div class="cost-row">
+              <img src="images/magnet.png" alt="Magnet Cost" class="cost-icon">
+              <label for="magnets" class="cost-label" id="magnetCost">Magnet Cost</label>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div class="cost-row">
+              <img src="images/starfragment.png" alt="Fragment Cost" class="cost-icon">
+              <label for="starFragmens" class="cost-label" id="fragmentCost">Fragment Cost</label>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-</div>
-<div style="color:white; text-align:center;">Designed with 🤍 by ScrapObsession's very own Dom</div>
-<div style="color:white; text-align:center;">Meticulous coded and tested by Jugh3ad</div>
-<div style="color:white; text-align:center;">Images courtesy of <a href="https://official-scrap-2.fandom.com/">Official Scrap 2 Wiki | Fandom</a></div>
-<div style="color:white; text-align:center;">Issues/Suggestions? <a href="https://github.com/jugh3ad/StarCalc">Submit a Pull Request or Issue</a></div>
 
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/site.js"></script>
+    <div class="tab-content" id="tab1">
+      <h2>Position Upgrade Calculator</h2>
+      <p>Placeholder for Position Upgrade Calculator functionality.</p>
+    </div>
+    <div class="tab-content" id="tab2">
+      <h2>Quest Level Calculator</h2>
+      <p>Placeholder for Quest Level Calculator functionality.</p>
+    </div>
+    <div class="tab-content" id="tab3">
+      <h2>Merges Calculator</h2>
+      <p>Placeholder for Merges Calculator functionality.</p>
+    </div>
+    <div class="tab-content" id="tab4">
+      <h2>General Info</h2>
+      <p>Placeholder for general information about the game.</p>
+    </div>
+    <div class="tab-content" id="tab5">
+      <h2>Numbers:</h2>
+      <button id="numberNotation">Normal</button>
+      <p id="numberExample">(1M, 1B, 1T, ...)</p>
+      <span id="languageSpan"><img id="languageIcon" src="images/language.png">
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="pl">Polski</option>
+          <option value="pt">Português</option>
+          <option value="ru">Pусский</option>
+          <option value="uk">Українська</option>
+          <option value="it">Italiano</option>
+          <option value="tr">Türkçe</option>
+        </select>
+      </span>
+      <br>
+      <h2>Remember Settings</h2>
+      <div class="checkbox-wrapper-38">
+        <input class="toggle-input" id="slider-38" type="checkbox"></input>
+        <label class="toggle-label" for="slider-38"></label>
+      </div>
+
+      <button id="resetAll">Reset All</button>
+
+    </div>
+  </div>
+  <script type="text/javascript" src="javascript/code.js"></script>
+  <script type="text/javascript" src="javascript/starTab.js"></script>
+  <script type="text/javascript" src="javascript/starCalc.js"></script>
 </body>
+
 </html>

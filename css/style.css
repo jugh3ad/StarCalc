@@ -1,0 +1,637 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* Keep buttons at top, content below */
+    min-height: 100vh;
+    /* Full viewport height */
+    background-color: #535353;
+
+}
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    /* Optional: center buttons horizontally */
+    padding: 10px;
+    background-color: #333;
+}
+
+.tab-buttons button {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.tab-content {
+    flex: 1;
+    padding: 10px;
+    display: none;
+}
+
+.tab-content.active {
+    flex: 1;
+    /* Take up remaining space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center horizontally */
+    text-align: center;
+
+    /* Background styling */
+    background: #a1a1a1;
+    /* Light contrasting color */
+    border-radius: 12px;
+    /* Rounded corners */
+    padding: 30px;
+    /* Space inside */
+    margin: 20px auto;
+    /* Space around */
+    max-width: 600px;
+    /* Keep it neat on large screens */
+    min-width: 300px;
+
+    /* Shadow for depth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tab-buttons img,
+.tab-buttons span {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.btn-square {
+    aspect-ratio: 1 / 1;
+}
+
+.btn-rect {
+    aspect-ratio: 2 / 1;
+}
+
+#btn-star {
+    background: linear-gradient(to bottom, #4b4b4b 50%, #161616 50%);
+}
+
+#btn-position {
+    background: linear-gradient(to bottom, #12FB12 50%, #12CC12 50%);
+}
+
+#btn-quest {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+}
+
+#btn-merges {
+    background: linear-gradient(to bottom, #808080 50%, #4b4b4b 50%);
+}
+
+#btn-info {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    font-weight: bolder;
+    font-size: xx-large;
+    color: white;
+    margin-left: auto;
+}
+
+#btn-options {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+}
+
+
+
+#setAll {
+    width: 80px;
+    /* Adjust to desired size */
+    padding: 4px;
+    /* Comfortable spacing */
+    font-size: 1rem;
+    /* Match text size */
+    /* Space between label and input */
+    /* Center the number inside */
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+
+}
+
+/* Chrome, Safari, Edge */
+#setAll::-webkit-inner-spin-button,
+#setAll::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+#setAll[type=number] {
+    -moz-appearance: textfield;
+}
+
+.number-control {
+    display: inline-flex;
+    align-items: center;
+    gap: px;
+    /* spacing between buttons and input */
+}
+
+.number-control input {
+    width: 80px;
+    text-align: center;
+}
+
+.number-control button {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.number-control button:hover {
+    background: #357ab8;
+}
+
+/* ========== Star Grid ========== */
+#starGrid {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.star-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+}
+
+.star-col {
+    text-align: center;
+}
+
+.star-wrapper {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* anchor for absolute positioning */
+}
+
+.star-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.star-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Position the buttons at the bottom corners */
+.star-wrapper .btn-minus,
+.star-wrapper .btn-plus {
+    position: absolute;
+    bottom: 5px;
+    /* stick to bottom */
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    ;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 1.0rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.star-wrapper .btn-minus {
+    left: 15px;
+    /* bottom-left corner */
+}
+
+.star-wrapper .btn-plus {
+    right: 15px;
+    /* bottom-right corner */
+}
+
+/* Chrome, Safari, Edge */
+.star-input::-webkit-inner-spin-button,
+.star-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.star-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ========== Boost Section ========== */
+.boost-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.boost-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+}
+
+.boost-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.boost-row {
+    display: flex;
+    align-items: center;
+}
+
+.boost-icon-wrapper {
+    position: relative;
+}
+
+.boost-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.boost-overlay {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 2px 4px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.boost-input {
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    background: white;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 0.25rem;
+}
+
+/* Chrome, Safari, Edge */
+.boost-input::-webkit-inner-spin-button,
+.boost-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.boost-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+/* ========== Target Section ========== */
+#target {
+  display: flex;
+  align-items: center;   /* vertically center the label with the star */
+  justify-content: center;
+  gap: 1rem;             /* spacing between label and star */
+  }
+
+.target-wrapper {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  display: inline-block;
+}
+
+.target-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.target-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.target-input {
+  position: absolute;
+  top: 50%;              /* center vertically */
+  left: 50%;             /* center horizontally */
+  transform: translate(-50%, -50%);
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.target-overlay .btn-minus,
+.target-overlay .btn-plus {
+    position: absolute;
+    bottom: 5px;
+    /* stick to bottom */
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    ;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    pointer-events: auto;
+    /* re-enable clicks for buttons */
+}
+
+.target-overlay .btn-minus {
+    left: 5px;
+    /* bottom-left corner */
+}
+
+.target-overlay .btn-plus {
+    right: 5px;
+    /* bottom-right corner */
+}
+
+
+.target-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+
+/* Chrome, Safari, Edge */
+.target-input::-webkit-inner-spin-button,
+.target-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.target-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.collapsible {
+  background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  border-radius: 4px;
+  margin-bottom: 5px;
+      font-size: 0.8rem;
+    font-weight: bolder;
+    font-size: large;
+    color: white;
+    text-align: center;
+
+}
+
+.collapsible:hover {
+  background-color: #357ab8;
+}
+
+.content {
+  max-height: 0;              /* hidden by default */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #f1f1f1;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+
+
+/* ========== Costs Section ========== */
+#costs {
+    width: 100%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.costs-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200px;
+}
+
+.cost-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cost-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.cost-label {
+    font-weight: bold;
+    font-size: x-large;
+    text-align: left;
+    margin: 0;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.cost-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+
+
+
+#numberNotation {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    font-weight: bolder;
+    font-size: xx-large;
+    color: white;
+    width: 200px;
+}
+
+#languageSpan {
+    position: relative;
+    /* Make this the positioning container */
+    display: inline-block;
+    /* Keep it inline */
+    margin-top: 2em;
+}
+
+#languageIcon {
+    width: 128px;
+    /* Adjust size as needed */
+    height: 128px;
+    display: block;
+}
+
+#languageSelect {
+    position: absolute;
+    /* Layer on top of the image */
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* Perfect centering */
+    background: linear-gradient(to bottom, rgba(128, 128, 128, 0.4) 50%, rgba(75, 75, 75, 0.4) 50%);
+    font-size: 0.9rem;
+    font-weight: bolder;
+    font-size: xx-large;
+    color: white;
+    text-align: center;
+    /* Center the option text */
+    text-align-last: center;
+    /* Ensures the selected option is centered */
+
+}
+
+#languageSelect option {
+    background-color: #535353;
+    /* Solid color only */
+    color: white;
+}
+
+#resetAll {
+    background: linear-gradient(to bottom, #70C6FF 50%, #1C87FF 50%);
+    font-weight: bolder;
+    font-size: xx-large;
+    color: white;
+    width: 200px;
+    margin: auto;
+}
+
+.checkbox-wrapper-38 {
+    --toggleWidth: 60px;
+    --toggleHeight: 25px;
+    --switchSize: 25px;
+    --dotSize: 6px;
+
+    width: var(--toggleWidth);
+    height: var(--toggleHeight);
+    position: relative;
+}
+
+.checkbox-wrapper-38 .toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: -9999px;
+    border: 1px solid #cd2d27;
+    background-color: #ed352d;
+    background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    z-index: 5;
+    -webkit-transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkbox-wrapper-38 .toggle-label:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: var(--switchSize);
+    height: var(--switchSize);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(bottom, rgba(230, 233, 239, 0.31) 0%, rgba(255, 255, 255, 0.31) 100%);
+    background-image: linear-gradient(to top, rgba(230, 233, 239, 0.31) 0%, rgba(255, 255, 255, 0.31) 100%);
+    -webkit-transition: left 0.2s;
+}
+
+.checkbox-wrapper-38 .toggle-label:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc((var(--switchSize)/2) - 4px);
+    left: calc((var(--switchSize)/2) - 4px);
+    width: var(--dotSize);
+    height: var(--dotSize);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: #d4d6db;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    -webkit-transition: left 0.2s;
+}
+
+.checkbox-wrapper-38 .toggle-input {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.checkbox-wrapper-38 .toggle-input:checked+.toggle-label {
+    border: 1px solid #2c8512;
+    text-align: left;
+    background-color: #29a105;
+}
+
+.checkbox-wrapper-38 .toggle-input:checked+.toggle-label:after {
+    left: calc(var(--toggleWidth) - var(--switchSize));
+}
+
+.checkbox-wrapper-38 .toggle-input:checked+.toggle-label:before {
+    left: calc(var(--toggleWidth) - var(--switchSize) + 10px);
+}
