@@ -20,12 +20,12 @@ body {
     display: flex;
     justify-content: center;
     /* Optional: center buttons horizontally */
-    padding: 10px;
+    /* padding: 10px; */
     background-color: #333;
 }
 
 .tab-buttons button {
-    width: 100px;
+    width: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -634,4 +634,5 @@ body {
 
 .checkbox-wrapper-38 .toggle-input:checked+.toggle-label:before {
     left: calc(var(--toggleWidth) - var(--switchSize) + 10px);
+
 }
