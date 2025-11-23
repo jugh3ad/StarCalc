@@ -55,13 +55,13 @@ body {
     /* Light contrasting color */
     border-radius: 12px;
     /* Rounded corners */
-    padding: 30px;
+    /* padding: 30px; */
     /* Space inside */
     margin: 20px auto;
     /* Space around */
-    max-width: 600px;
+    /* max-width: 600px; */
     /* Keep it neat on large screens */
-    min-width: 300px;
+    /* min-width: 300px; */
 
     /* Shadow for depth */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -636,4 +636,5 @@ body {
     left: calc(var(--toggleWidth) - var(--switchSize) + 10px);
 
 }
+
 
